@@ -1,6 +1,5 @@
 // Get player selection
-// let playerSelection = prompt("Pleae enter a selection");
-// console.log(playerSelection);
+// let userChoice = prompt("Pleae enter a selection");
 
 // Create array for results of gampeplay
 const outcomes = [
@@ -9,13 +8,18 @@ const outcomes = [
   "Scissors beats Paper",
 ];
 
+// Capture user selection
+let playerSelection = prompt("Enter a selection");
+
 // Write computerPlay() function. Randomly returns
 // "Rock", "Paper", or "Scissors" for the computer
 function computerPlay() {
   // Create array for selection display
   const selection = ["Rock", "Paper", "Scissors"];
+
   // Make random selection
   let choice = Math.floor(Math.random() * selection.length);
+
   return selection[choice];
 }
 
@@ -25,37 +29,56 @@ function computerPlay() {
 function playRound(playerSelection, computerSelection) {
   // Make selection case-insensitive for user
   let playerUser = playerSelection.toLowerCase();
-  let computerUser = playerSelection.toLowerCase();
-
-  // Counters for each selection
-  let rockCount = 0;
-  let paperCount = 0;
-  let scissorsCount = 0;
-
+  let computerUser = computerSelection.toLowerCase();
+  // console.log(playerUser);
   // Counters to add player/computer selections
   let playCount = 0;
   let computerCount = 0;
 
+  // Gameplay to see who wins
+  if (playerUser === computerUser) {
+    console.log(
+      `Player One you chose ${playerSelection} just like the computer. Try again!`
+    );
+    prompt("Enter another selection");
+  } else if (playerUser === "rock" && computerUser === "scissors") {
+    console.log(`${playerSelection} beats ${computerSelection}. You win!`);
+  } else if (playerUser === "paper" && computerUser === "rock") {
+    console.log(`${playerSelection} beats ${computerSelection}. You win!`);
+  } else if (playerUser === "scissors" && computerUser === "paper") {
+    console.log(`${playerSelection} beats ${computerSelection}. You win!`);
+  }
+
+  if (computerUser === "paper" && playerUser === "rock") {
+    console.log(
+      `${computerSelection} beats ${playerSelection}. Computer wins!`
+    );
+  } else if (computerUser === "rock" && playerUser === " scissors") {
+    console.log(
+      `${computerSelection} beats ${playerSelection}. Computer wins!`
+    );
+  } else if (computerUser === "scissors" && playerUser === "paper") {
+    console.log(
+      `${computerSelection} beats ${playerSelection}. Computer wins!`
+    );
+  }
+
   return playerUser, computerUser;
-
-  // If count === 3, player wins
-  // if (playCount === 3) {
-  //   console.log(`You won! Player One beats selection`);
-  // } else {
-  //   console.log(`You lose! selection beats selection`);
-  // }
-  // if (computerCount === 3) {
-  //   console.log(`You won! Computer beats selection`);
-  // } else {
-  //   console.log(`You lose! selection beats selection`);
-  // }
 }
-// playRound("Rock", "BOOGER");
 
-const playerSelection = "Rock";
-const computerSelection = computerPlay();
+console.log(playRound(playerSelection, computerPlay()));
 
-console.log(playRound(playerSelection, computerSelection));
 // Write game() function that calls the playRound() function
 // and play a 5-round game and keeps score and declares a
 // winner, or loser
+
+// **************************************************
+// Function test below
+// const playerSelection = "ROCKU";
+// const computerSelection = computerPlay();
+
+// Counters for game
+// Counters for each selection
+// let rockCount = 0;
+// let paperCount = 0;
+// let scissorsCount = 0;
