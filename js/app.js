@@ -1,84 +1,82 @@
-// Get player selection
-// let userChoice = prompt("Pleae enter a selection");
-
-// Create array for results of gampeplay
-const outcomes = [
-  "Paper beats Rock",
-  "Rock beats Scissors",
-  "Scissors beats Paper",
-];
-
-// Capture user selection
-let playerSelection = prompt("Enter a selection");
+// ******************************* //
 
 // Write computerPlay() function. Randomly returns
 // "Rock", "Paper", or "Scissors" for the computer
 function computerPlay() {
-  // Create array for selection display
-  const selection = ["Rock", "Paper", "Scissors"];
-
-  // Make random selection
-  let choice = Math.floor(Math.random() * selection.length);
-
+  // Array for computer selections
+  // const selection = ["Rock", "Paper", "Scissors"];
+  // const selection = ["Scissors", "Scissors", "Scissors"];
+  const selection = ["RocK", "RocK", "RocK"];
+  const len = selection.length;
+  let choice = Math.floor(Math.random() * len);
   return selection[choice];
 }
 
+// Player selection
+// let playerSelection = prompt("Enter a selection");
+let playerSelection;
+let computerSelection = computerPlay();
+
+// Counters for game, player, and computer
+let gameCounter = 0;
+let playerCount = 0;
+let computerCount = 0;
 // Write playRound() function that takes
 // 2 parameters(playerSelection, computerSelection)
-// And displays a winner or loser
+// And displays a winner
 function playRound(playerSelection, computerSelection) {
-  // Make selection case-insensitive for user
-  let playerUser = playerSelection.toLowerCase();
-  let computerUser = computerSelection.toLowerCase();
-  // console.log(playerUser);
-  // Counters to add player/computer selections
-  let playCount = 0;
-  let computerCount = 0;
+  // Convert selections to lowercase to allow comparison
+  const playerChoice = playerSelection.toLowerCase();
+  const computerChoice = computerPlay().toLowerCase();
+  console.log(playerChoice, computerChoice);
 
-  // Gameplay to see who wins
-  if (playerUser === computerUser) {
-    console.log(
-      `Player One you chose ${playerSelection} just like the computer. Try again!`
-    );
-    prompt("Enter another selection");
-  } else if (playerUser === "rock" && computerUser === "scissors") {
-    console.log(`${playerSelection} beats ${computerSelection}. You win!`);
-  } else if (playerUser === "paper" && computerUser === "rock") {
-    console.log(`${playerSelection} beats ${computerSelection}. You win!`);
-  } else if (playerUser === "scissors" && computerUser === "paper") {
-    console.log(`${playerSelection} beats ${computerSelection}. You win!`);
+  // Decide winner of each round
+  // First see if choices are eual
+  if (playerChoice === computerChoice) {
+    // Condtional to reset counter if selections are equal
+    gameCounter--;
+    console.log("Same choice. Try again!");
+  } else if (playerChoice === "rock" && computerChoice === "scissors") {
+    playerCount++;
+  } else if (playerChoice === "scissors" && computerChoice === "paper") {
+    playerCount++;
+  } else if (playerChoice === "paper" && computerChoice === "rock") {
+    playerCount++;
   }
 
-  if (computerUser === "paper" && playerUser === "rock") {
-    console.log(
-      `${computerSelection} beats ${playerSelection}. Computer wins!`
-    );
-  } else if (computerUser === "rock" && playerUser === " scissors") {
-    console.log(
-      `${computerSelection} beats ${playerSelection}. Computer wins!`
-    );
-  } else if (computerUser === "scissors" && playerUser === "paper") {
-    console.log(
-      `${computerSelection} beats ${playerSelection}. Computer wins!`
-    );
+  if (computerChoice === "rock" && playerChoice === "scissors") {
+    computerCount++;
+  } else if (computerChoice === "scissors" && playerChoice === "paper") {
+    computerCount++;
+  } else if (computerChoice === "paper" && playerChoice === "rock") {
+    computerCount++;
   }
 
-  return playerUser, computerUser;
+  // Game counter increment and display
+  gameCounter++;
+
+  // Display game counter
+  console.log(`Games played: ${gameCounter}`);
+
+  // Declare winner after "3" wins
+  if (playerCount === 3) {
+    console.log(`Player wins!`);
+  }
+  if (computerCount === 3) {
+    console.log(`Computer wins!`);
+  }
+  console.log(`Player games: ${playerCount}`);
+  console.log(`Computer games: ${computerCount}`);
 }
-
-console.log(playRound(playerSelection, computerPlay()));
 
 // Write game() function that calls the playRound() function
 // and play a 5-round game and keeps score and declares a
 // winner, or loser
+function game(playerSelection, computerSelection) {
+  for (i = 0; i < 5; i++) {
+    let playerSelection = prompt("Enter a selection");
+    playRound(playerSelection, computerPlay());
+  }
+}
 
-// **************************************************
-// Function test below
-// const playerSelection = "ROCKU";
-// const computerSelection = computerPlay();
-
-// Counters for game
-// Counters for each selection
-// let rockCount = 0;
-// let paperCount = 0;
-// let scissorsCount = 0;
+game(playerSelection, computerPlay());
