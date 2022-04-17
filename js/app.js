@@ -21,6 +21,7 @@ let computerSelection = computerPlay();
 let gameCounter = 0;
 let playerCount = 0;
 let computerCount = 0;
+
 // Write playRound() function that takes
 // 2 parameters(playerSelection, computerSelection)
 // And displays a winner
@@ -60,14 +61,18 @@ function playRound(playerSelection, computerSelection) {
 
   // Declare winner after "3" wins
   if (playerCount === 3) {
-    console.log(`Player wins!`);
+    console.log(`Player Wins!`);
+    return `Player Wins!`;
   }
   if (computerCount === 3) {
-    console.log(`Computer wins!`);
+    console.log(`Computer Wins!`);
+    return `Computer Wins!`;
   }
-  console.log(`Player games: ${playerCount}`);
-  console.log(`Computer games: ${computerCount}`);
+  console.log(`Player wins: ${playerCount}`);
+  console.log(`Computer wins: ${computerCount}`);
 }
+
+game(playerSelection, computerPlay());
 
 // Write game() function that calls the playRound() function
 // and play a 5-round game and keeps score and declares a
@@ -75,8 +80,8 @@ function playRound(playerSelection, computerSelection) {
 function game(playerSelection, computerSelection) {
   for (i = 0; i < 5; i++) {
     let playerSelection = prompt("Enter a selection");
-    playRound(playerSelection, computerPlay());
+    if (playRound(playerSelection, computerSelection) === "Player Wins!") {
+      break;
+    }
   }
 }
-
-game(playerSelection, computerPlay());
