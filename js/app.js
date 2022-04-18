@@ -1,4 +1,6 @@
 // ******************************* //
+// Game button connection
+const btnGame = document.querySelector(".btnGame");
 
 // Write computerPlay() function. Randomly returns
 // "Rock", "Paper", or "Scissors" for the computer
@@ -6,7 +8,7 @@ function computerPlay() {
   // Test Arrays...
   // const selection = ["Scissors", "Scissors", "Scissors"];
   // const selection = ["RocK", "RocK", "RocK"];
-  
+
   // Array for computer selections
   const selection = ["Rock", "Paper", "Scissors"];
   const len = selection.length;
@@ -25,10 +27,17 @@ let playerCount = 0;
 let computerCount = 0;
 let gamesDrawnCounter = 0;
 
+// Event Listener to start game
+btnGame.addEventListener("click", () => {
+  game(playerSelection, computerSelection);
+});
+
 // Write playRound() function that takes
 // 2 parameters(playerSelection, computerSelection)
 // And displays a winner
 function playRound(playerSelection, computerSelection) {
+  // Try array
+
   // Convert selections to lowercase to allow comparison
   const playerChoice = playerSelection.toLowerCase();
   const computerChoice = computerPlay().toLowerCase();
@@ -76,7 +85,7 @@ function playRound(playerSelection, computerSelection) {
 }
 
 // Call game to play a session
-game(playerSelection, computerPlay());
+// game(playerSelection, computerSelection);
 
 // Write game() function that calls the playRound() function
 // and play a 5-round game and keeps score and declares a
