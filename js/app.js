@@ -3,9 +3,11 @@
 // Write computerPlay() function. Randomly returns
 // "Rock", "Paper", or "Scissors" for the computer
 function computerPlay() {
-  // Array for computer selections
+  // Test Arrays...
   // const selection = ["Scissors", "Scissors", "Scissors"];
   // const selection = ["RocK", "RocK", "RocK"];
+  
+  // Array for computer selections
   const selection = ["Rock", "Paper", "Scissors"];
   const len = selection.length;
   let choice = Math.floor(Math.random() * len);
