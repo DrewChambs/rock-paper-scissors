@@ -26,6 +26,8 @@ body {
 }
 .game-title {
   margin-bottom: 1em;
+  text-align: center;
+  line-height: 1.5;
 }
 .btnGame {
   cursor: pointer;
