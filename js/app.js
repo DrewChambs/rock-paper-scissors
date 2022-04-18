@@ -1,6 +1,6 @@
 // ******************************* //
 // Game button connection
-const btnGame = document.querySelector(".btnGame");
+// const btnGame = document.querySelector(".btnGame");
 
 // Write computerPlay() function. Randomly returns
 // "Rock", "Paper", or "Scissors" for the computer
@@ -38,7 +38,7 @@ let gamesDrawnCounter = 0;
 function playRound(playerSelection, computerSelection) {
   // Convert selections to lowercase to allow comparison
   const playerChoice = playerSelection.toLowerCase();
-  const computerChoice = computerSelection.toLowerCase();
+  const computerChoice = computerPlay().toLowerCase();
 
   // Decide winner of each round
   // First see if choices are eual
@@ -90,7 +90,7 @@ function playRound(playerSelection, computerSelection) {
 }
 
 // Call game to play a session
-game(playerSelection, computerSelection);
+game(playerSelection, computerPlay());
 
 // Write game() function that calls the playRound() function
 // and play a 5-round game and keeps score and declares a
@@ -154,13 +154,11 @@ function computerRoundWinner(playerChoice, computerChoice) {
 function capitalizePlayer(playerChoice) {
   firstLetter = playerChoice.charAt(0).toUpperCase();
   let result = playerChoice.replace(playerChoice.charAt(0), firstLetter);
-
   return result;
 }
 function capitalizeComputer(computerChoice) {
   firstLetter = computerChoice.charAt(0).toUpperCase();
   let result = computerChoice.replace(computerChoice.charAt(0), firstLetter);
-
   return result;
 }
 
