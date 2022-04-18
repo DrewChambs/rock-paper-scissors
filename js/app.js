@@ -27,20 +27,18 @@ let playerCount = 0;
 let computerCount = 0;
 let gamesDrawnCounter = 0;
 
-// Event Listener to start game
-btnGame.addEventListener("click", () => {
-  game(playerSelection, computerSelection);
-});
+// Button to start game
+// btnGame.addEventListener("click", () => {
+//   game(playerSelection, computerSelection);
+// });
 
 // Write playRound() function that takes
 // 2 parameters(playerSelection, computerSelection)
 // And displays a winner
 function playRound(playerSelection, computerSelection) {
-  // Try array
-
   // Convert selections to lowercase to allow comparison
   const playerChoice = playerSelection.toLowerCase();
-  const computerChoice = computerPlay().toLowerCase();
+  const computerChoice = computerSelection.toLowerCase();
 
   // Decide winner of each round
   // First see if choices are eual
@@ -48,18 +46,25 @@ function playRound(playerSelection, computerSelection) {
     gamesDrawnCounter++;
     console.log("Same choice. Try again!");
   } else if (playerChoice === "rock" && computerChoice === "scissors") {
+    // console.log(`You Win! ${playerChoice} beats ${computerChoice}`);
+    playerRoundWinner(playerChoice, computerChoice);
     playerCount++;
   } else if (playerChoice === "scissors" && computerChoice === "paper") {
+    playerRoundWinner(playerChoice, computerChoice);
     playerCount++;
   } else if (playerChoice === "paper" && computerChoice === "rock") {
+    playerRoundWinner(playerChoice, computerChoice);
     playerCount++;
   }
-
+  // Computer selection comparison
   if (computerChoice === "rock" && playerChoice === "scissors") {
+    computerRoundWinner(playerChoice, computerChoice);
     computerCount++;
   } else if (computerChoice === "scissors" && playerChoice === "paper") {
+    computerRoundWinner(playerChoice, computerChoice);
     computerCount++;
   } else if (computerChoice === "paper" && playerChoice === "rock") {
+    computerRoundWinner(playerChoice, computerChoice);
     computerCount++;
   }
   // Game counter increment and display
@@ -76,16 +81,16 @@ function playRound(playerSelection, computerSelection) {
   );
 
   if (playerCount === 3) {
-    console.log(`Player Wins! Computer Loses!`);
+    console.log(`Player Wins!`);
     return 3;
   } else if (computerCount === 3) {
-    console.log(`Computer Wins! Player Loses!`);
+    console.log(`Computer Wins!`);
     return 3;
   }
 }
 
 // Call game to play a session
-// game(playerSelection, computerSelection);
+game(playerSelection, computerSelection);
 
 // Write game() function that calls the playRound() function
 // and play a 5-round game and keeps score and declares a
@@ -94,7 +99,7 @@ function game(playerSelection, computerSelection) {
   // Internal game counter to monitor games played
   let internalGameCounter = 5;
   for (i = 0; i < internalGameCounter; i++) {
-    let playerSelection = prompt("Enter a selection");
+    playerSelection = prompt("Enter a selection");
 
     if (playRound(playerSelection, computerSelection) === 3) {
       break;
@@ -128,3 +133,35 @@ function displayResults(
   console.log(`----------------------------------------------`);
   console.log(`----------------------------------------------`);
 }
+
+// Functions to declare winner of each round
+function playerRoundWinner(playerChoice, computerChoice) {
+  return console.log(
+    `You Win! ${capitalizePlayer(playerChoice)} beats ${capitalizeComputer(
+      computerChoice
+    )}`
+  );
+}
+function computerRoundWinner(playerChoice, computerChoice) {
+  console.log(
+    `Computer wins this round! ${capitalizeComputer(
+      computerChoice
+    )} beats ${capitalizePlayer(playerChoice)}`
+  );
+}
+
+// Capitalize first letter for Each round display
+function capitalizePlayer(playerChoice) {
+  firstLetter = playerChoice.charAt(0).toUpperCase();
+  let result = playerChoice.replace(playerChoice.charAt(0), firstLetter);
+
+  return result;
+}
+function capitalizeComputer(computerChoice) {
+  firstLetter = computerChoice.charAt(0).toUpperCase();
+  let result = computerChoice.replace(computerChoice.charAt(0), firstLetter);
+
+  return result;
+}
+
+capitalizeComputer("been");
