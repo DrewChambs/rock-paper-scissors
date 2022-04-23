@@ -1,6 +1,6 @@
 // ******************************* //
 // Game Button
-// const btnGame = document.querySelector(".btnGame");
+const btnGame = document.querySelector(".btnGame");
 
 // Write computerPlay() function. Randomly returns
 // "Rock", "Paper", or "Scissors" for the computer
@@ -22,10 +22,13 @@ let playerCount = 0;
 let computerCount = 0;
 let gamesDrawnCounter = 0;
 
+////////////////////////////////////////
+//Rock, Paper, Scissors 23 de abril, 2022 //
+////////////////////////////////////////
 // Start game
-// btnGame.addEventListener("click", () => {
-//   game(playerSelection, computerSelection);
-// });
+btnGame.addEventListener("click", () => {
+  game(playerSelection, computerSelection);
+});
 
 // Write playRound() function that takes
 // 2 parameters(playerSelection, computerSelection)
