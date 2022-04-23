@@ -1,6 +1,4 @@
 // ******************************* //
-// Game Button
-// const btnGame = document.querySelector(".btnGame");
 
 // Write computerPlay() function. Randomly returns
 // "Rock", "Paper", or "Scissors" for the computer
@@ -21,11 +19,6 @@ let gameCounter = 0;
 let playerCount = 0;
 let computerCount = 0;
 let gamesDrawnCounter = 0;
-
-// Start game
-// btnGame.addEventListener("click", () => {
-//   game(playerSelection, computerSelection);
-// });
 
 // Write playRound() function that takes
 // 2 parameters(playerSelection, computerSelection)
