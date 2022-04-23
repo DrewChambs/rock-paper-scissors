@@ -83,7 +83,7 @@ function playRound(playerSelection, computerSelection) {
 }
 
 // Start game
-game(playerSelection, computerPlay());
+// game(playerSelection, computerPlay());
 
 // Write game() function that calls the playRound() function
 // and play a 5-round game that keeps score and declares a
