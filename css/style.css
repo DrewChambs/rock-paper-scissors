@@ -13,27 +13,119 @@ body {
   width: 90%;
   margin: 0 auto;
   max-width: 900px;
-  padding: 5em;
+  padding: 3em;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .title {
-  font-size: 3rem;
+  font-size: 4rem;
   text-align: center;
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
   margin-top: 100px;
 }
 .game-title {
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
   text-align: center;
   line-height: 1.5;
+  font-size: 2rem;
 }
-.btnGame {
+/* In-game display */
+.game-tracker-container {
+  width: 89%;
+  margin-bottom: 1.25em;
+  padding: 2em;
+  display: flex;
+  gap: 10px;
+}
+.scores-box {
+  background-color: grey;
+  height: 80px;
+  width: 80%;
+  border: 5px solid red;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  font-weight: 900;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-bottom: 2.5em 0;
+}
+.scores-box .player-score,
+.scores-box .computer-score {
+  margin-top: 0.35em;
+}
+.score-display-container {
+  width: 80%;
+  margin: 0 auto;
+  max-width: 900px;
+  background-color: grey;
+  height: 200px;
+  border: 5px solid red;
+  border-radius: 5px;
+  margin-bottom: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.main-score-display {
+  font-size: 1.2rem;
+  font-weight: 900;
+  line-height: 1.5;
+}
+.same-choice-win {
+  font-size: 2rem;
+}
+/* Buttons */
+.btn-holder {
+  display: flex;
+  gap: 20px;
+}
+.choiceBtn {
   cursor: pointer;
   font-size: 1.4rem;
   padding: 0.5em;
   background-color: steelblue;
   color: #fff;
   border-radius: 5px;
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  text-transform: uppercase;
+  border: 5px solid rgb(10, 32, 97);
+  letter-spacing: 2px;
+  transition: 250ms ease-in;
 }
+.choiceBtn:hover {
+  color: #000;
+  background-color: orangered;
+}
+.refreshBtn {
+  margin-top: 2em;
+  cursor: pointer;
+  font-size: 1.4rem;
+  padding: 0.5em;
+  background-color: #000;
+  color: #fff;
+  border-radius: 5px;
+  /* width: 150px; */
+  display: flex;
+  justify-content: center;
+  text-transform: uppercase;
+  border: 5px solid rgb(10, 32, 97);
+  transition: 250ms ease-in;
+  letter-spacing: 2px;
+}
+.refreshBtn:hover {
+  color: #000;
+  background-color: orangered;
+}
+/* .rockBtn,
+.paperBtn,
+.scissorsBtn {
+  display: flex;
+  text-align: center;
+} */

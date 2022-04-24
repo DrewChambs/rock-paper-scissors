@@ -1,12 +1,11 @@
 // ******************************* //
-// Game Button
-const btnGame = document.querySelector(".btnGame");
 
 // Write computerPlay() function. Randomly returns
 // "Rock", "Paper", or "Scissors" for the computer
 function computerPlay() {
   // Array for computer selections
-  const selection = ["Rock", "Paper", "Scissors"];
+  // const selection = ["Rock", "Paper", "Scissors"];
+  const selection = ["Rock", "Rock", "Rock"];
   const len = selection.length;
   let choice = Math.floor(Math.random() * len);
   return selection[choice];
@@ -25,11 +24,24 @@ let gamesDrawnCounter = 0;
 ////////////////////////////////////////
 //Rock, Paper, Scissors 23 de abril, 2022 //
 ////////////////////////////////////////
-// Start game
-btnGame.addEventListener("click", () => {
-  game(playerSelection, computerSelection);
+//  ********* UI ***************
+// Display Container
+const resultsDisplay = document.querySelector(".score-display");
+// Game Buttons
+const gameBtns = document.querySelectorAll(".choiceBtn");
+const refreshBtn = document.querySelector(".refreshBtn");
+gameBtns.forEach(item => {
+  item.addEventListener("click", e => {
+    playerSelection = e.currentTarget.dataset.id;
+    console.log(playerSelection);
+    game(playerSelection, computerPlay());
+  });
 });
-
+// Start new game
+refreshBtn.addEventListener("click", () => {
+  console.log("Refreshing...");
+  game(playerSelection, computerPlay());
+});
 // Write playRound() function that takes
 // 2 parameters(playerSelection, computerSelection)
 // And displays a winner
@@ -93,7 +105,7 @@ function playRound(playerSelection, computerSelection) {
 // winner, or loser
 function game(playerSelection, computerSelection) {
   // Internal game counter to monitor games played
-  let internalGameCounter = 5;
+  let internalGameCounter = 7;
   for (i = 0; i < internalGameCounter; i++) {
     playerSelection = prompt("Enter a selection");
     if (playRound(playerSelection, computerSelection) === 3) {
@@ -128,7 +140,10 @@ function displayResults(
 }
 
 // Declare winners
-function playerRoundWinner(playerChoice, computerChoice) {
+function playerRoundWinner(playerChoice, computerChoice, gameDisplay) {
+  resultsDisplay.textContent = `You Win! ${capitalizePlayer(
+    playerChoice
+  )} beats ${capitalizeComputer(computerChoice)}`;
   return console.log(
     `You Win! ${capitalizePlayer(playerChoice)} beats ${capitalizeComputer(
       computerChoice
@@ -137,6 +152,9 @@ function playerRoundWinner(playerChoice, computerChoice) {
 }
 
 function computerRoundWinner(playerChoice, computerChoice) {
+  resultsDisplay.textContent = `Computer wins this round! ${capitalizeComputer(
+    computerChoice
+  )} beats ${capitalizePlayer(playerChoice)}`;
   console.log(
     `Computer wins this round! ${capitalizeComputer(
       computerChoice
