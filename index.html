@@ -10,10 +10,11 @@
   <body>
     <h1 class="title">Rock, Paper, Scissors</h1>
     <!-- Main Container -->
-    <div class="container">
+    <div class="game-container">
       <h2 class="game-title">Make Your Selection to Play the Computer</h2>
-      <!-- Game Display -->
+      <!-- Game Tracker By Round -->
       <div class="game-tracker-container">
+        <!-- Display player score by round -->
         <div class="scores-box">
           <p class="score-title">Player Score</p>
           <p class="player-score">0</p>
@@ -23,8 +24,14 @@
           <p class="computer-score">0</p>
         </div>
       </div>
-      <div class="score-display-container">
-        <p class="main-score-display"></p>
+      <!-- Main Display Game Details -->
+      <div class="main-score-display-container">
+        <p class="main-score-round-winner">
+          You win this round! <br />
+          Rock beats Rock
+        </p>
+        <p class="main-score-display">Games Played: 0</p>
+        <p class="main-score-display">Games tied: 0</p>
       </div>
       <!-- Buttons -->
       <div class="btn-holder">
@@ -36,12 +43,11 @@
       </div>
       <!-- Refresh Button -->
       <div class="start-game-container">
-        <button class="refreshBtn">refresh game</button>
+        <!-- <button class="refreshBtn">refresh game</button> -->
       </div>
     </div>
 
     <!-- Script Link -->
-    <!-- <script src="./js/app.js"></script> -->
-    <script src="./js/appTest.js"></script>
+    <script src="./js/app.js"></script>
   </body>
 </html>
