@@ -45,6 +45,7 @@ body {
 .scores-box {
   background-color: grey;
   height: 80px;
+  width: 200px;
   min-width: 100px;
   border: 5px solid red;
   border-radius: 5px;
@@ -56,7 +57,7 @@ body {
   align-items: center;
   text-align: center;
   padding: 2.5em 1em;
-  color: #fff;
+  /* color: #fff; */
 }
 .scores-box .player-score,
 .scores-box .computer-score {
@@ -73,18 +74,21 @@ body {
   margin-bottom: 2em;
   padding: 2em 1em;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .main-score-round-winner {
   font-size: 1.2rem;
   font-weight: 900;
   line-height: 1.5;
-  color: #fff;
+  /* color: #fff; */
 }
 .main-score-display {
   font-size: 1.2rem;
   font-weight: 900;
   line-height: 1.5;
-  color: #fff;
+  /* color: #fff; */
 }
 .same-choice-win {
   font-size: 2rem;
@@ -115,7 +119,7 @@ body {
   color: #000;
   background-color: orangered;
 }
-.refreshBtn {
+.resetBtn {
   margin-top: 2em;
   cursor: pointer;
   font-size: 1.2rem;
@@ -130,13 +134,14 @@ body {
   transition: 250ms ease-in;
   letter-spacing: 2px;
 }
-.refreshBtn:hover {
+.resetBtn:hover {
   color: #000;
   background-color: orangered;
 }
 /********* QUERIES *********/
 @media (min-width: 400px) {
   .main-score-display-container {
+    flex-direction: column;
     min-height: 220px;
   }
   /**** Buttons ****/
