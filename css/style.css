@@ -9,31 +9,192 @@
 body {
   font-family: "Helvetica", "Arial", sans-serif;
 }
-.container {
+/**** Whole game container ****/
+.game-container {
   width: 90%;
   margin: 0 auto;
   max-width: 900px;
-  padding: 5em;
+  padding: 2em 1em;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
+/**** Typography ****/
 .title {
-  font-size: 3rem;
+  font-size: 2.5rem;
   text-align: center;
-  margin-bottom: 1em;
+  /* margin-bottom: 0.5em; */
   margin-top: 100px;
 }
 .game-title {
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
   text-align: center;
   line-height: 1.5;
+  font-size: 2rem;
 }
-.btnGame {
-  cursor: pointer;
+
+/**** In-game display ****/
+.game-tracker-container {
+  width: 89%;
+  margin-bottom: 1.25em;
+  padding: 1em 2.5em;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.scores-box {
+  background-color: grey;
+  height: 70px;
+  width: 200px;
+  min-width: 100px;
+  border: 5px solid red;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  font-weight: 900;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2.5em 1em;
+}
+.scores-box .player-score,
+.scores-box .computer-score {
+  margin-top: 0.35em;
+}
+.main-score-display-container {
+  width: 80%;
+  margin: 0 auto;
+  max-width: 900px;
+  background-color: grey;
+  min-height: 250px;
+  border: 5px solid red;
+  border-radius: 5px;
+  margin-bottom: 1em;
+  padding: 2em 1em;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.main-score-round-winner {
   font-size: 1.4rem;
-  padding: 0.5em;
+  font-weight: 900;
+  line-height: 1.5;
+}
+.main-score-display {
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 1.5;
+}
+.same-choice-win {
+  font-size: 2rem;
+}
+
+/**** Buttons ****/
+.reset-container {
+  height: 0;
+  overflow: hidden;
+}
+.resetBtn-show {
+  height: 92px;
+}
+.btn-holder {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: 250ms ease;
+}
+.btn-hide {
+  height: 0;
+  overflow: hidden;
+}
+.choiceBtn {
+  cursor: pointer;
+  font-size: 0.5rem;
+  padding: 0.5em 2em;
   background-color: steelblue;
   color: #fff;
   border-radius: 5px;
+  width: 110px;
+  display: flex;
+  justify-content: center;
+  text-transform: uppercase;
+  border: 5px solid rgb(10, 32, 97);
+  letter-spacing: 2px;
+  transition: 250ms ease-in;
+}
+.choiceBtn:hover {
+  color: #000;
+  background-color: orangered;
+}
+.resetBtn {
+  margin-top: 2em;
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 0.5em;
+  background-color: #000;
+  color: #fff;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  text-transform: uppercase;
+  border: 5px solid rgb(10, 32, 97);
+  transition: 250ms ease;
+  letter-spacing: 2px;
+}
+.resetBtn:hover {
+  color: #000;
+  background-color: orangered;
+}
+
+/********* QUERIES *********/
+@media (min-width: 400px) {
+  .main-score-display-container {
+    min-height: 220px;
+  }
+
+  /**** Buttons ****/
+  .btn-holder {
+    flex-direction: row;
+    gap: 10px;
+  }
+  .choiceBtn {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 600px) {
+  .title {
+    font-size: 3rem;
+
+    margin-bottom: 0.5em;
+    margin-top: 100px;
+  }
+
+  /**** Buttons ****/
+  /* .btn-holder {
+    flex-direction: row;
+  } */
+  .choiceBtn {
+    font-size: 1.4rem;
+    width: 150px;
+  }
+  .resetBtn {
+    font-size: 1.2rem;
+  }
+  .scores-box {
+    font-size: 1.5rem;
+    padding: 2.5em 1em;
+  }
+  .main-score-round-winner {
+    font-size: 2.2rem;
+
+    line-height: 1.5;
+  }
+  .main-score-display {
+    font-size: 1.2rem;
+  }
 }

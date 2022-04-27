@@ -1,147 +1,201 @@
-// ******************************* //
-
-// Write computerPlay() function. Randomly returns
-// "Rock", "Paper", or "Scissors" for the computer
+// Random Computer Selection
 function computerPlay() {
-  // Array for computer selections
-  const selection = ["Rock", "Paper", "Scissors"];
+  const selection = ["rock", "paper", "scissors"];
   const len = selection.length;
   let choice = Math.floor(Math.random() * len);
   return selection[choice];
 }
 
-// Player selection
-let playerSelection;
-let computerSelection = computerPlay();
+// ****** UI ******* //
+// Buttons ******** //
+const chooseBtn = document.querySelectorAll(".choiceBtn");
+const resetBtn = document.querySelector(".resetBtn");
+const btnHolder = document.querySelector(".btn-holder");
+const resetContainer = document.querySelector(".reset-container");
+
+// Scores ******** //
+const playerScore = document.querySelector(".player-score");
+const computerScore = document.querySelector(".computer-score");
+
+// Main Score Display ******* //
+const mainScoreDisplay = document.querySelector(
+  ".main-score-display-container"
+);
+
+// Start Game
+chooseBtn.forEach(item => {
+  item.addEventListener("click", e => {
+    // Get player selection
+    let playerSelection = e.currentTarget.dataset.id;
+
+    // Start game
+    if (playRound(playerSelection, computerPlay()) === 5) {
+      // Show and hide buttons
+      btnHolder.classList.add("btn-hide");
+      resetContainer.classList.add("resetBtn-show");
+    }
+  });
+});
+
+// Reset
+resetBtn.addEventListener("click", () => {
+  resetGame();
+
+  // Show and hide buttons
+  btnHolder.classList.remove("btn-hide");
+  resetContainer.classList.remove("resetBtn-show");
+});
 
 // Counters
-let gameCounter = 0;
 let playerCount = 0;
 let computerCount = 0;
-let gamesDrawnCounter = 0;
+let gameCount = 0;
+let gamesTied = 0;
 
-// Write playRound() function that takes
-// 2 parameters(playerSelection, computerSelection)
-// And displays a winner
 function playRound(playerSelection, computerSelection) {
-  // Convert to lowercase for comparison
-  const playerChoice = playerSelection.toLowerCase();
-  const computerChoice = computerPlay().toLowerCase();
-
-  // Check for same choice
-  if (playerChoice === computerChoice) {
-    gamesDrawnCounter++;
-    console.log("Same choice. Try again!");
-  } else if (playerChoice === "rock" && computerChoice === "scissors") {
-    playerRoundWinner(playerChoice, computerChoice);
+  // Player Selection
+  if (playerSelection === computerSelection) {
+    gamesTied++;
+    gameCount++;
+    sameChoiceDisplay(gameCount, gamesTied);
+  } else if (playerSelection === "rock" && computerSelection === "scissors") {
+    gameCount++;
     playerCount++;
-  } else if (playerChoice === "scissors" && computerChoice === "paper") {
-    playerRoundWinner(playerChoice, computerChoice);
+    playerDisplay(playerSelection, computerSelection, gameCount, gamesTied);
+  } else if (playerSelection === "paper" && computerSelection === "rock") {
+    gameCount++;
     playerCount++;
-  } else if (playerChoice === "paper" && computerChoice === "rock") {
-    playerRoundWinner(playerChoice, computerChoice);
+    playerDisplay(playerSelection, computerSelection, gameCount, gamesTied);
+  } else if (playerSelection === "scissors" && computerSelection === "paper") {
+    gameCount++;
     playerCount++;
+    playerDisplay(playerSelection, computerSelection, gameCount, gamesTied);
   }
-  // Computer selection comparison
-  if (computerChoice === "rock" && playerChoice === "scissors") {
-    computerRoundWinner(playerChoice, computerChoice);
-    computerCount++;
-  } else if (computerChoice === "scissors" && playerChoice === "paper") {
-    computerRoundWinner(playerChoice, computerChoice);
-    computerCount++;
-  } else if (computerChoice === "paper" && playerChoice === "rock") {
-    computerRoundWinner(playerChoice, computerChoice);
-    computerCount++;
-  }
-  // Game counter
-  gameCounter++;
 
-  // Console Display
-  displayResults(
-    playerCount,
-    computerCount,
-    gamesDrawnCounter,
-    gameCounter,
-    playerChoice,
-    computerChoice
-  );
-  // Return winner
-  if (playerCount === 3) {
-    console.log(`Player Wins!`);
-    return 3;
-  } else if (computerCount === 3) {
-    console.log(`Computer Wins!`);
-    return 3;
+  // Computer selection
+  if (computerSelection === "rock" && playerSelection === "scissors") {
+    gameCount++;
+    computerCount++;
+    computerDisplay(playerSelection, computerSelection, gameCount, gamesTied);
+    // computerConsoleDisplay(playerSelection, computerSelection);
+  } else if (computerSelection === "paper" && playerSelection === "rock") {
+    gameCount++;
+    computerCount++;
+    computerDisplay(playerSelection, computerSelection, gameCount, gamesTied);
+    // computerConsoleDisplay(playerSelection, computerSelection);
+  } else if (computerSelection === "scissors" && playerSelection === "paper") {
+    gameCount++;
+    computerCount++;
+    computerDisplay(playerSelection, computerSelection, gameCount, gamesTied);
+    // computerConsoleDisplay(playerSelection, computerSelection);
+    //
+  }
+  // gameCount++;
+  // Console Game Display
+  // console.log(`Games played: ${gameCount}`);
+  // console.log(`Games tied: ${gamesTied}`);
+  // console.log(`Player games won: ${playerCount}`);
+  // console.log(`Computer games won: ${computerCount}`);
+  // console.log(`Games tied: ${gamesTied}`);
+  playerScore.innerHTML = `${playerCount}`;
+  computerScore.innerHTML = `${computerCount}`;
+
+  // Disply Final Winner
+  if (playerCount === 5) {
+    console.log("Game Over! You Win!");
+    mainScoreDisplay.innerHTML = `<p class="main-score-round-winner">Game Over! You Win!</p>`;
+    gameCount = 0;
+    return 5;
+  } else if (computerCount === 5) {
+    console.log("Game Over! Computer Wins!");
+    mainScoreDisplay.innerHTML = `<p class="main-score-round-winner">Game Over! Computer Wins!</p>`;
+    gameCount = 0;
+    return 5;
   }
 }
 
-// Start game
-// game(playerSelection, computerPlay());
-
-// Write game() function that calls the playRound() function
-// and play a 5-round game that keeps score and declares a
-// winner, or loser
-function game(playerSelection, computerSelection) {
-  // Internal game counter to monitor games played
-  let internalGameCounter = 5;
-  for (i = 0; i < internalGameCounter; i++) {
-    playerSelection = prompt("Enter a selection");
-    if (playRound(playerSelection, computerSelection) === 3) {
-      break;
-    } else {
-      internalGameCounter++;
-    }
-  }
+// Game Reset Function
+function resetGame() {
+  playerCount = 0;
+  computerCount = 0;
+  gameCount = 0;
+  gamesTied = 0;
+  playerScore.innerHTML = `${playerCount}`;
+  computerScore.innerHTML = `${computerCount}`;
+  mainScoreDisplay.innerHTML = `  <p class="main-score-round-winner">
+          Game Time! <br />
+          Make a Selection
+        </p>
+        <p class="main-score-display">Games Played: 0</p>
+        <p class="main-score-display">Games tied: 0</p>`;
 }
 
-// Display results
-function displayResults(
-  playerCount,
-  computerCount,
-  gamesDrawnCounter,
-  gameCounter,
-  playerChoice,
-  computerChoice
+// Player Display
+function playerDisplay(
+  playerSelection,
+  computerSelection,
+  gameCount,
+  gamesTied
 ) {
-  console.log(
-    `Player plays "${playerChoice.toUpperCase()}", Computer plays "${computerChoice.toUpperCase()}"`
-  );
-
-  console.log(
-    `Games played: ${gameCounter} | Games tied: ${gamesDrawnCounter}`
-  );
-  console.log("Games Won:");
-  console.log(`Player: ${playerCount}`);
-  console.log(`Computer: ${computerCount}`);
-  console.log(`----------------------------------------------`);
-  console.log(`----------------------------------------------`);
+  mainScoreDisplay.innerHTML = `   <p class="main-score-round-winner">
+          You win this round! <br />
+          ${capitalizePlayer(playerSelection)} beats ${capitalizeComputer(
+    computerSelection
+  )}
+        </p>
+        <p class="main-score-display">Games played: ${gameCount}</p>
+        <p class="main-score-display">Games tied: ${gamesTied}</p>`;
 }
 
-// Declare winners
-function playerRoundWinner(playerChoice, computerChoice) {
-  return console.log(
-    `You Win! ${capitalizePlayer(playerChoice)} beats ${capitalizeComputer(
-      computerChoice
-    )}`
-  );
+// Game Display
+function computerDisplay(
+  playerSelection,
+  computerSelection,
+  gameCount,
+  gamesTied
+) {
+  mainScoreDisplay.innerHTML = `<p class="main-score-round-winner">
+          Computer wins this round! <br />
+          ${capitalizeComputer(computerSelection)} beats ${capitalizePlayer(
+    playerSelection
+  )}
+        </p>
+        <p class="main-score-display">Games played: ${gameCount}</p>
+        <p class="main-score-display">Games tied: ${gamesTied}</p>`;
 }
 
-function computerRoundWinner(playerChoice, computerChoice) {
+// Same Choice Display
+function sameChoiceDisplay(gameCount, gamesTied) {
+  mainScoreDisplay.innerHTML = `   <p class="main-score-round-winner">
+          You chose the same<br />
+          Try again!
+        </p>
+        <p class="main-score-display">Games Played: ${gameCount}</p>
+        <p class="main-score-display">Games tied: ${gamesTied}</p>`;
+}
+
+// Computer Console Display
+function computerConsoleDisplay(playerSelection, computerSelection) {
   console.log(
-    `Computer wins this round! ${capitalizeComputer(
-      computerChoice
-    )} beats ${capitalizePlayer(playerChoice)}`
+    `Player says: ${playerSelection}. Computer says: ${computerSelection}`
+  );
+  console.log(
+    `Computer wins this round ${computerSelection} beats ${playerSelection}`
   );
 }
 
-// Capitalize first letter for display
-function capitalizePlayer(playerChoice) {
-  firstLetter = playerChoice.charAt(0).toUpperCase();
-  let result = playerChoice.replace(playerChoice.charAt(0), firstLetter);
+// Capitalize first letter of display
+function capitalizePlayer(playerSelection) {
+  firstLetter = playerSelection.charAt(0).toUpperCase();
+  let result = playerSelection.replace(playerSelection.charAt(0), firstLetter);
+  console.log(result);
   return result;
 }
-function capitalizeComputer(computerChoice) {
-  firstLetter = computerChoice.charAt(0).toUpperCase();
-  let result = computerChoice.replace(computerChoice.charAt(0), firstLetter);
+function capitalizeComputer(computerSelection) {
+  firstLetter = computerSelection.charAt(0).toUpperCase();
+  let result = computerSelection.replace(
+    computerSelection.charAt(0),
+    firstLetter
+  );
   return result;
 }
