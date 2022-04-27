@@ -1,12 +1,8 @@
 // Random Computer Selection
 function computerPlay() {
-  // const selection = ["rock", "paper", "scissors"];
-  const selection = ["rock", "rock", "rock"];
-  // const selection = ["scissors", "scissors", "scissors"];
+  const selection = ["rock", "paper", "scissors"];
   const len = selection.length;
   let choice = Math.floor(Math.random() * len);
-  // console.log(`Random num: ${choice}`);
-  // console.log(`Selection: ${selection[choice]}`);
   return selection[choice];
 }
 
@@ -14,9 +10,13 @@ function computerPlay() {
 // Buttons ******** //
 const chooseBtn = document.querySelectorAll(".choiceBtn");
 const resetBtn = document.querySelector(".resetBtn");
+const btnHolder = document.querySelector(".btn-holder");
+const resetContainer = document.querySelector(".reset-container");
+
 // Scores ******** //
 const playerScore = document.querySelector(".player-score");
 const computerScore = document.querySelector(".computer-score");
+
 // Main Score Display ******* //
 const mainScoreDisplay = document.querySelector(
   ".main-score-display-container"
@@ -27,15 +27,23 @@ chooseBtn.forEach(item => {
   item.addEventListener("click", e => {
     // Get player selection
     let playerSelection = e.currentTarget.dataset.id;
+
     // Start game
-    playRound(playerSelection, computerPlay());
+    if (playRound(playerSelection, computerPlay()) === 5) {
+      // Show and hide buttons
+      btnHolder.classList.add("btn-hide");
+      resetContainer.classList.add("resetBtn-show");
+    }
   });
 });
 
 // Reset
 resetBtn.addEventListener("click", () => {
-  console.log("Stop the game!");
   resetGame();
+
+  // Show and hide buttons
+  btnHolder.classList.remove("btn-hide");
+  resetContainer.classList.remove("resetBtn-show");
 });
 
 // Counters
@@ -92,20 +100,18 @@ function playRound(playerSelection, computerSelection) {
   playerScore.innerHTML = `${playerCount}`;
   computerScore.innerHTML = `${computerCount}`;
 
+  // Disply Final Winner
   if (playerCount === 5) {
-    // resetGame();
     console.log("Game Over! You Win!");
     mainScoreDisplay.innerHTML = `<p class="main-score-round-winner">Game Over! You Win!</p>`;
     gameCount = 0;
     return 5;
   } else if (computerCount === 5) {
-    // resetGame();
     console.log("Game Over! Computer Wins!");
     mainScoreDisplay.innerHTML = `<p class="main-score-round-winner">Game Over! Computer Wins!</p>`;
     gameCount = 0;
     return 5;
   }
-  // resetGame();
 }
 
 // Game Reset Function
@@ -133,7 +139,9 @@ function playerDisplay(
 ) {
   mainScoreDisplay.innerHTML = `   <p class="main-score-round-winner">
           You win this round! <br />
-          ${playerSelection} beats ${computerSelection}
+          ${capitalizePlayer(playerSelection)} beats ${capitalizeComputer(
+    computerSelection
+  )}
         </p>
         <p class="main-score-display">Games played: ${gameCount}</p>
         <p class="main-score-display">Games tied: ${gamesTied}</p>`;
@@ -148,7 +156,9 @@ function computerDisplay(
 ) {
   mainScoreDisplay.innerHTML = `<p class="main-score-round-winner">
           Computer wins this round! <br />
-          ${computerSelection} beats ${playerSelection}
+          ${capitalizeComputer(computerSelection)} beats ${capitalizePlayer(
+    playerSelection
+  )}
         </p>
         <p class="main-score-display">Games played: ${gameCount}</p>
         <p class="main-score-display">Games tied: ${gamesTied}</p>`;
@@ -172,4 +182,20 @@ function computerConsoleDisplay(playerSelection, computerSelection) {
   console.log(
     `Computer wins this round ${computerSelection} beats ${playerSelection}`
   );
+}
+
+// Capitalize first letter of display
+function capitalizePlayer(playerSelection) {
+  firstLetter = playerSelection.charAt(0).toUpperCase();
+  let result = playerSelection.replace(playerSelection.charAt(0), firstLetter);
+  console.log(result);
+  return result;
+}
+function capitalizeComputer(computerSelection) {
+  firstLetter = computerSelection.charAt(0).toUpperCase();
+  let result = computerSelection.replace(
+    computerSelection.charAt(0),
+    firstLetter
+  );
+  return result;
 }
