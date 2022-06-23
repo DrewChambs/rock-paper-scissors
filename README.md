@@ -1,5 +1,5 @@
 # Rock-Paper-Scissors Application - The Odin Project Application
-Part of a series of appplications, and various web projects, from The Odin Project.
+Part of a series of applications, and various web projects, from The Odin Project.
 
 # Rock, Paper, Scissors game initial setup
 
